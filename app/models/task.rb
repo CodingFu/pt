@@ -9,4 +9,8 @@ class Task < ActiveRecord::Base
       TaskAssignment.create!(user: user, task: self, status: "todo")
     end
   end
+
+  def status_for_user(user)
+    task_assignments.where(user: user).first.try :status
+  end
 end

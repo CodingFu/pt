@@ -1,11 +1,20 @@
 PtWeb::Application.routes.draw do
-  resources :articles
-
-  get "home/index"
-  devise_for :users
+  get "tasks/index"
   root "home#index"
+  devise_for :users
 
   resources :users
+  resources :articles
+  resources :subjects do
+    resources :tasks do
+      member do
+        put :todo
+        put :review
+        put :done
+      end
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

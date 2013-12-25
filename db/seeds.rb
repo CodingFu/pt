@@ -20,6 +20,12 @@ teacher2 = User.create email: "teacher@gmail.com", name: "Teacher",
   Subject.create!(owner: teacher, name: "subject #{i}", description: "lol")
 end
 
+# Students
+20.times do |i|
+  student = User.create! email: "student#{i}@gmail.com", name: "Студент #{i}",
+    is_teacher: false, password: "12345678", password_confirmation: "12345678"
+end
+
 # Lessons
 Subject.all.each_with_index do |subject, i|
   date = DateTime.now
@@ -32,8 +38,3 @@ Subject.all.each_with_index do |subject, i|
   end
 end
 
-# Students
-20.times do |i|
-  student = User.create! email: "student#{i}@gmail.com", name: "Студент #{i}",
-    is_teacher: true, password: "12345678", password_confirmation: "12345678"
-end

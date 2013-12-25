@@ -1,0 +1,24 @@
+h1= @subject.name
+h2
+  | Препод 
+  = @subject.owner.name
+
+h2 Задачи
+- if current_user.is_teacher
+  - @subject.tasks.all.each do |task|
+    h4= task.name
+    - User.students.all.each do |student|
+        p
+          = student.name
+          p= task.status_for_user(student)
+          = link_to "move to todo", "#{todo_subject_task_path(subject, task)}/?user_id=#{student.id}", method: :put
+          = link_to "move to review", "#{review_subject_task_path(subject, task)}/?user_id=#{student.id}", method: :put
+          = link_to "move to done", "#{done_subject_task_path(subject, task)}/?user_id=#{student.id}", method: :put
+- else
+  - @subject.tasks.each do |task|
+    li
+      = task.name
+      p= task.status_for_user(current_user)
+      = link_to "move to todo |", "#{todo_subject_task_path(@subject, task)}/?user_id=#{current_user.id}", method: :put
+      = link_to "move to review |", "#{review_subject_task_path(@subject, task)}/?user_id=#{current_user.id}", method: :put
+      = link_to "move to done", "#{done_subject_task_path(@subject, task)}/?user_id=#{current_user.id}", method: :put
