@@ -1,4 +1,6 @@
 PtWeb::Application.routes.draw do
+  resources :articles
+
   get "home/index"
   devise_for :users
   root "home#index"

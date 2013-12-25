@@ -11,7 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131225135632) do
+ActiveRecord::Schema.define(version: 20131225140346) do
+
+  create_table "articles", force: true do |t|
+    t.string   "name"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lessons", force: true do |t|
+    t.integer  "subject_id_id"
+    t.string   "name"
+    t.string   "kind"
+    t.date     "date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "lessons", ["subject_id_id"], name: "index_lessons_on_subject_id_id"
 
   create_table "subjects", force: true do |t|
     t.integer  "owner_id_id"
@@ -22,6 +40,16 @@ ActiveRecord::Schema.define(version: 20131225135632) do
   end
 
   add_index "subjects", ["owner_id_id"], name: "index_subjects_on_owner_id_id"
+
+  create_table "tasks", force: true do |t|
+    t.integer  "lesson_id_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tasks", ["lesson_id_id"], name: "index_tasks_on_lesson_id_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
