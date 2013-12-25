@@ -4,5 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :subjects, foreign_key: 'owner_id'
+  has_many :subjects, foreign_key: 'owner_id', dependent: :destroy
+  has_many :task_assignments, dependent: :destroy
+  has_many :tasks, through: :task_assignments
 end
