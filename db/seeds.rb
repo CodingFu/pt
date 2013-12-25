@@ -25,7 +25,7 @@ Subject.all.each_with_index do |subject, i|
   date = DateTime.now
   50.times do |j|
     date += 7.days
-    lesson = Lesson.create!(name: "", kind: Lesson::KINDS.sample, date: date)
+    lesson = Lesson.create!(subject: subject, name: "", kind: Lesson::KINDS.sample, date: date)
     if lesson.kind == "practice"
       Task.create! lesson: lesson, name: "task #{j}", description: "do the task dude"
     end
