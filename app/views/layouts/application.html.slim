@@ -1,0 +1,40 @@
+doctype html
+html
+  head
+    title ТП
+    == stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    == javascript_include_tag "application", "data-turbolinks-track" => true
+    == csrf_meta_tags
+  body
+    header
+      #logo
+        | кафедра
+        br
+        span 
+          | Т
+        | ЕХНОЛОГИЙ
+        br 
+        span 
+          | П
+        | РОГРАММИРОВАНИЯ
+      - if current_user
+        ul#nav
+          li
+            a href="#" Главная
+          li
+            a href="#" КУРСЫ
+          - unless current_user.is_teacher
+            li
+              a href="#" МОИ ЗАДАНИЯ
+        #user
+          p 
+            = current_user.name
+            br
+            - unless current_user.is_teacher
+               = "#{current_user.course} Курс"
+
+    div class="button down" id="cal_btn" МОЕ РАСПИСАНИЕ          
+    div style="clear: both"
+    == yield
+    footer
+      p 2005-2013 All Rights Reserved. ©  FAMCS BSU, Inc.
